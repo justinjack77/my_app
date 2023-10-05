@@ -5,13 +5,15 @@ const mysql = require("mysql");
 const cors = require("cors");
 const PORT = 5000;
 const myADataBase = "mydb";
+// const conA = require("confi.js");
+
 
 
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'mydb'
+    database: myADataBase
 });
 
 
