@@ -1,0 +1,6 @@
+backend
+npm init -y
+npm install express mysql cors nodemon
+
+frontend
+npm create vite@latest
