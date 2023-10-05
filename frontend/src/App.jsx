@@ -1,19 +1,41 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
+// import './App.css'
 
 // import React from "react";
 
 function App() {
 
+  const [data, setData] = useState([])
   useEffect(()=>{
-    fetch('http://localhost:5000/users');
+    fetch('http://localhost:5000/users')
+    .then(res=>res.json()).then(data=>setData(data))
+    .catch(err=>console.log(err));
   },[]);
     return (
 
-      <div>
-
+      <div style={{padding:"50px"}} >
+        <table>
+          <thead>
+            <th>ID</th>
+            <th>User Name</th>
+            {/* <th>Password</th> */}
+            <th>Role</th>
+          </thead>
+          <tbody>
+            {data.map((d,i)=>(
+            <tr key={i}>
+              <td>{d.id}</td>
+              <td>{d.username}</td>
+              {/* <td>{d.password}</td> */}
+              <td>{d.role}</td>
+            </tr>
+            )
+            )}
+          </tbody>
+        </table>
       </div>
     
   )
