@@ -5,39 +5,45 @@ import React, { useEffect, useState } from 'react';
 // import './App.css'
 
 // import React from "react";
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
 
   const [data, setData] = useState([])
-  useEffect(()=>{
+  useEffect(() => {
     fetch('http://localhost:5000/users')
-    .then(res=>res.json()).then(data=>setData(data))
-    .catch(err=>console.log(err));
-  },[]);
-    return (
+      .then(res => res.json()).then(data => setData(data))
+      .catch(err => console.log(err));
+  }, []);
+  return (
 
-      <div style={{padding:"50px"}} >
-        <table>
-          <thead>
-            <th>ID</th>
-            <th>User Name</th>
-            {/* <th>Password</th> */}
-            <th>Role</th>
-          </thead>
-          <tbody>
-            {data.map((d,i)=>(
+    <div style={{ padding: "50px" }} >
+      <div>
+        <h1>User Page</h1>
+      </div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((d, i) => (
             <tr key={i}>
               <td>{d.id}</td>
               <td>{d.username}</td>
               {/* <td>{d.password}</td> */}
               <td>{d.role}</td>
             </tr>
-            )
-            )}
-          </tbody>
-        </table>
-      </div>
-    
+
+          )
+          )}
+        </tbody>
+      </table>
+    </div>
+
   )
 }
 
