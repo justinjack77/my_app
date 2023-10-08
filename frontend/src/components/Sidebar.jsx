@@ -1,72 +1,120 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+// import Icon from "../Images/Icon.svg";
+import Icon from "../assets/react.svg"
+// import Profile from "../Images/profile.png";
+import Dashboard from "../Images/dashboard.svg";
+import Transactions from "../Images/transactions.svg";
+import Performance from "../Images/performance.svg";
+import News from "../Images/news.svg";
+import Settings from "../Images/settings.svg";
+import Support from "../Images/support.svg";
+import { useLocation, Link } from "react-router-dom";
+// import dashbord from "../pages/Dashboard"
 
-// import React from 'react'
-import {
-    FaTh,
-    FaBars,
-    FaUserAlt,
-    FaRegChartBar,
-    FaCommentAlt,
-    FaShoppingBag,
-    FaThList
-}from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
+const Sidebar = () => {
+    const location = useLocation();
+
+    const [closeMenu] = useState(false);
 
 
-const Sidebar = ({children}) => {
-    const[isOpen ,setIsOpen] = useState(false);
-    const toggle = () => setIsOpen (!isOpen);
-    const menuItem=[
-        {
-            path:"/",
-            name:"Dashboard",
-            icon:<FaTh/>
-        },
-        {
-            path:"/about",
-            name:"About",
-            icon:<FaUserAlt/>
-        },
-        {
-            path:"/analytics",
-            name:"Analytics",
-            icon:<FaRegChartBar/>
-        },
-        {
-            path:"/comment",
-            name:"Comment",
-            icon:<FaCommentAlt/>
-        },
-        {
-            path:"/product",
-            name:"Product",
-            icon:<FaShoppingBag/>
-        },
-        {
-            path:"/productList",
-            name:"Product List",
-            icon:<FaThList/>
-        }
-    ]
     return (
-        <div className="container">
-           <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
-               <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">Logo</h1>
-                   <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
-                       <FaBars onClick={toggle}/>
-                   </div>
-               </div>
-               {
-                   menuItem.map((item, index)=>(
-                       <NavLink to={item.path} key={index} className="link" activeclassName="active">
-                           <div className="icon">{item.icon}</div>
-                           <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
-                       </NavLink>
-                   ))
-               }
-           </div>
-           <main>{children}</main>
+        <div className={closeMenu === false ? "sidebar" : "sidebar active"}>
+            <div
+                className={
+                    closeMenu === false
+                        ? "logoContainer"
+                        : "logoContainer active"
+                }
+            >
+                <img src={Icon} alt="icon" className="logo" />
+                <h2 className="title">AABranch</h2>
+            </div>
+            <div><hr /><hr /></div>
+            {/* <div
+                className={
+                    closeMenu === false
+                        ? "burgerContainer"
+                        : "burgerContainer active"
+                }
+            >
+                <div
+                    className="burgerTrigger"
+                    onClick={() => {
+                        handleCloseMenu();
+                    }}
+                ></div>
+                <div className="burgerMenu"></div>
+            </div> */}
+            {/* <div
+                className={
+                    closeMenu === false
+                        ? "profileContainer"
+                        : "profileContainer active"
+                }
+            >
+                <img src={Profile} alt="profile" className="profile" />
+                <div className="profileContents">
+                    <p className="name">Hello, John👋</p>
+                    <p>johnsmith@gmail.com</p>
+                </div>
+            </div> */}
+            <div
+                className={
+                    closeMenu === false
+                        ? "contentsContainer"
+                        : "contentsContainer active"
+                }
+            >
+                <ul>
+                    <li className={location.pathname === "/" ? "active" : ""}>
+                        <img src={Dashboard} alt="dashboard" />
+                        <Link to="/">dashboard</Link>
+
+                    </li>
+                    <li
+                        className={
+                            location.pathname === "/transactions"
+                                ? "active"
+                                : ""
+                        }
+                    >
+                        <img src={Transactions} alt="transactions" />
+                        <Link to="/transactions">transactions</Link>
+                    </li>
+                    <li
+                        className={
+                            location.pathname === "/performance" ? "active" : ""
+                        }
+                    >
+                        <img src={Performance} alt="Performance" />
+                        <Link to="/performance">performance</Link>
+                    </li>
+                    <li
+                        className={
+                            location.pathname === "/news" ? "active" : ""
+                        }
+                    >
+                        <img src={News} alt="News" />
+                        <Link to="/news">news</Link>
+                    </li>
+                    <li
+                        className={
+                            location.pathname === "/settings" ? "active" : ""
+                        }
+                    >
+                        <img src={Settings} alt="Settings" />
+                        <Link to="/settings">settings</Link>
+                    </li>
+                    <li
+                        className={
+                            location.pathname === "/support" ? "active" : ""
+                        }
+                    >
+                        <img src={Support} alt="Support" />
+                        <Link to="/support">support</Link>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 };
