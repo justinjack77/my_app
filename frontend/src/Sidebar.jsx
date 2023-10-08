@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHome, FaSearch, FaEnvelope, FaGlobe, FaTrash } from 'react-icons/fa';
+import Admin from './pages/Admin';
 
 const Sidebar = () => {
   return (
